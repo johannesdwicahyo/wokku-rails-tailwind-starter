@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: wokku_rails_tailwind_starter_development
+
+test:
+  <<: *default
+  database: wokku_rails_tailwind_starter_test
+
+production:
+  <<: *default
+  # Wokku sets DATABASE_URL when a database addon is attached. Explicit
+  # beats convention: a missing url fails loudly at boot, not at first query.
+  url: <%= ENV["DATABASE_URL"] %>
